@@ -1,0 +1,343 @@
+WindowManager: 
+    AutorizationScreen:
+    MainScreen:
+    CompanyScreen:
+    AutomatScreen:
+
+<AutorizationScreen>:
+    name: 'auto'
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 10,10,10,10
+        spacing: 20
+
+        MDAnchorLayout:
+            MDLabel:
+                text: 'Вход в систему'
+                font_size: 30
+                pos_hint: {'center_x': .5, 'center_y':.5}
+                height: self.texture_size[1]
+
+        MDAnchorLayout:
+            MDTextField:
+                id: login_input
+                hint_text: 'Введите телефон или email'
+                icon_left: 'account'
+                pos_hint: {'center_x': .5, 'center_y':.5}
+                size_hint: (.8, None)
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint: (.8,None)
+            pos_hint: {'center_x': .5, 'center_y':.5}
+            spacing: 20
+
+            MDTextField:
+                id: password_input
+                hint_text: 'Введите пароль'
+                icon_left: 'lock'
+                password: True
+                size_hint: (.8,None)
+            MDIconButton:
+                icon: 'eye-off'
+                on_release:
+                    self.icon ='eye' if self.icon=='eye-off' else 'eye-off'
+                    password_input.password=not password_input.password
+
+        MDAnchorLayout:
+            MDRaisedButton:
+                text: 'Войти'
+                on_release:
+                    root.check_autoriz()
+        MDLabel:
+            text: ''
+            color: [1,0,0]
+            id: error_label
+
+<MainScreen>:
+    name: 'main'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            padding: [10,0,10,0]
+            md_bg_color: "#eae8ee"
+            MDLabel:
+                text: 'logo'
+                size_hint_x: None
+                
+            MDFlatButton:
+                id: user_profile
+                text: 'ФИО. Роль'
+                size_hint_x: None
+                pos_hint: {'right':0.9}
+                on_release:
+                    root.open_user_menu()
+        MDScreen:
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                height: dp(20)
+                MDLabel:
+                    text: 'Личный кабинет. Главная'
+                    
+
+                MDGridLayout:
+                    cols: 3
+                    rows: 2
+                    md_bg_color: "#eae8ee"                
+
+                    MDCard: 
+                        cols: 1
+                        rows: 1
+                        orientation: 'vertical'
+                        size: 100, 100
+
+                        MDLabel: 
+                            text: 'Эффективность сети'
+                    MDCard:
+                        cols: 2
+                        rows: 1
+                        size: 100, 100
+                    
+                        MDLabel:
+                            text: 'Состояние сети'
+
+                    MDCard:
+                        cols: 3
+                        rows: 1
+                        size: 100,100
+
+                        MDLabel:
+                            text: 'Сводка'
+                    MDCard:
+                        cols: 1
+                        size: 100,200
+
+                        MDLabel: 
+                            text: 'Динамика продаж за последние 10 дней'
+
+                    MDCard: 
+                        cols: 3
+                        rows: 2
+                        MDLabel: 
+                            text: 'Новости'
+
+
+            MDNavigationLayout:
+
+                MDScreenManager:
+
+                    MDScreen:
+
+                        MDTopAppBar:
+                            title: "ООО Торговые Автоматы"
+                            elevation: 4
+                            pos_hint: {"top": 1}
+                            md_bg_color: "#252f59"
+                            specific_text_color: "#fdfdfd"
+                            left_action_items:
+                                [['menu', lambda x: nav_drawer.set_state("open")]]
+
+
+                MDNavigationDrawer:
+                    id: nav_drawer
+                    radius: (0, 16, 16, 0)
+                    md_bg_color: "#252f59"
+                    
+
+                    MDNavigationDrawerMenu:
+                        MDNavigationDrawerHeader:
+                            title: "Навигация"
+                            spacing: dp(4)
+                            padding: 12,0,0,5
+                            color: 253/255, 253/255, 253/255
+
+                        MDNavigationDrawerItem:
+                            icon: 'search'
+                            text: 'Главная'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'monitor'
+                            text: 'Монитор ТА'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'description'
+                            text: 'Детальные отчеты'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'shopping cart'
+                            text: 'Учет ТМЦ'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            id: admin_btn
+                            icon: 'manufacturing'
+                            text: 'Администрирование'
+                            color: 253/255, 253/255, 253/255
+                            on_release: root.open_admin_menu()
+            
+        
+<CompanyScreen>
+    name: 'company'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            padding: [10,0,10,0]
+            md_bg_color: "#eae8ee"
+            MDLabel:
+                text: 'logo'
+                size_hint_x: None
+                
+            MDFlatButton:
+                id: user_profile
+                text: 'ФИО. Роль'
+                size_hint_x: None
+                pos_hint: {'right':0.9}
+                on_release:
+                    root.open_user_menu()
+        MDScreen:
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                height: dp(20)
+                MDLabel:
+                    text: 'Личный кабинет. Компании'
+                    
+            MDNavigationLayout:
+
+                MDScreenManager:
+
+                    MDScreen:
+
+                        MDTopAppBar:
+                            title: "ООО Торговые Автоматы"
+                            elevation: 4
+                            pos_hint: {"top": 1}
+                            md_bg_color: "#252f59"
+                            specific_text_color: "#fdfdfd"
+                            left_action_items:
+                                [['menu', lambda x: nav_drawer.set_state("open")]]
+
+
+                MDNavigationDrawer:
+                    id: nav_drawer
+                    radius: (0, 16, 16, 0)
+                    md_bg_color: "#252f59"
+                    
+
+                    MDNavigationDrawerMenu:
+                        MDNavigationDrawerHeader:
+                            title: "Навигация"
+                            spacing: dp(4)
+                            padding: 12,0,0,5
+                            color: 253/255, 253/255, 253/255
+
+                        MDNavigationDrawerItem:
+                            icon: 'search'
+                            text: 'Главная'
+                            color: 253/255, 253/255, 253/255
+                            on_release: app.root.current='main'
+                        MDNavigationDrawerItem:
+                            icon: 'monitor'
+                            text: 'Монитор ТА'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'description'
+                            text: 'Детальные отчеты'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'shopping cart'
+                            text: 'Учет ТМЦ'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            id: admin_btn
+                            icon: 'manufacturing'
+                            text: 'Администрирование'
+                            color: 253/255, 253/255, 253/255
+                            on_release: root.open_admin_menu()
+
+<AutomatScreen>:
+    name: 'automat'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            padding: [10,0,10,0]
+            md_bg_color: "#eae8ee"
+            MDLabel:
+                text: 'logo'
+                size_hint_x: None
+                
+            MDFlatButton:
+                id: user_profile
+                text: 'ФИО. Роль'
+                size_hint_x: None
+                pos_hint: {'right':0.9}
+                on_release:
+                    root.open_user_menu()
+        MDScreen:
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                height: dp(20)
+                MDLabel:
+                    text: 'Личный кабинет. Торговые автоматы'
+                    
+            MDNavigationLayout:
+
+                MDScreenManager:
+
+                    MDScreen:
+
+                        MDTopAppBar:
+                            title: "ООО Торговые Автоматы"
+                            elevation: 4
+                            pos_hint: {"top": 1}
+                            md_bg_color: "#252f59"
+                            specific_text_color: "#fdfdfd"
+                            left_action_items:
+                                [['menu', lambda x: nav_drawer.set_state("open")]]
+
+
+                MDNavigationDrawer:
+                    id: nav_drawer
+                    radius: (0, 16, 16, 0)
+                    md_bg_color: "#252f59"
+                    
+
+                    MDNavigationDrawerMenu:
+                        MDNavigationDrawerHeader:
+                            title: "Навигация"
+                            spacing: dp(4)
+                            padding: 12,0,0,5
+                            color: 253/255, 253/255, 253/255
+
+                        MDNavigationDrawerItem:
+                            icon: 'search'
+                            text: 'Главная'
+                            color: 253/255, 253/255, 253/255
+                            on_release: app.root.current='main'
+                        MDNavigationDrawerItem:
+                            icon: 'monitor'
+                            text: 'Монитор ТА'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'description'
+                            text: 'Детальные отчеты'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            icon: 'shopping cart'
+                            text: 'Учет ТМЦ'
+                            color: 253/255, 253/255, 253/255
+                        MDNavigationDrawerItem:
+                            id: admin_btn
+                            icon: 'manufacturing'
+                            text: 'Администрирование'
+                            color: 253/255, 253/255, 253/255
+                            on_release: root.open_admin_menu()
