@@ -3,6 +3,10 @@ WindowManager:
     MainScreen:
     CompanyScreen:
     AutomatScreen:
+    ModemScreen:
+    AddingCompanyScreen:
+    MonitorTAScreen:
+    AddingAutomatcreen
 
 <AutorizationScreen>:
     name: 'auto'
@@ -25,6 +29,7 @@ WindowManager:
                 icon_left: 'account'
                 pos_hint: {'center_x': .5, 'center_y':.5}
                 size_hint: (.8, None)
+                text:''
         MDBoxLayout:
             orientation: 'horizontal'
             size_hint: (.8,None)
@@ -37,6 +42,7 @@ WindowManager:
                 icon_left: 'lock'
                 password: True
                 size_hint: (.8,None)
+                text: ''
             MDIconButton:
                 icon: 'eye-off'
                 on_release:
@@ -152,29 +158,48 @@ WindowManager:
                             title: "Навигация"
                             spacing: dp(4)
                             padding: 12,0,0,5
-                            color: 253/255, 253/255, 253/255
+                            color: '#ffffff'
 
                         MDNavigationDrawerItem:
                             icon: 'search'
                             text: 'Главная'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            text_color: '#ffffff'
+                            text_color: 1, 1, 1, 1
+                            color: '#252f59'
                         MDNavigationDrawerItem:
                             icon: 'monitor'
                             text: 'Монитор ТА'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            text_color: '#ffffff'
+                            text_color: 1, 1, 1, 1
+                            color: '#252f59'
+                            on_release: app.root.current='monitor'
                         MDNavigationDrawerItem:
                             icon: 'description'
                             text: 'Детальные отчеты'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            color: '#252f59'
                         MDNavigationDrawerItem:
                             icon: 'shopping cart'
                             text: 'Учет ТМЦ'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            color: '#252f59'
                         MDNavigationDrawerItem:
                             id: admin_btn
                             icon: 'manufacturing'
                             text: 'Администрирование'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            color: '#252f59'
                             on_release: root.open_admin_menu()
             
         
@@ -205,8 +230,17 @@ WindowManager:
                 orientation: 'vertical'
                 height: dp(20)
                 MDLabel:
-                    text: 'Личный кабинет. Компании'
+                    text: 'Администрирование. Компании'
                     
+
+                MDBoxLayout:
+                    id: table_layout
+                    orientation:'vertical'
+                    MDRaisedButton:
+                        text: 'Добавить'
+                        icon_left: 'plus'
+                        on_release: app.root.current='add_company'
+
             MDNavigationLayout:
 
                 MDScreenManager:
@@ -234,30 +268,51 @@ WindowManager:
                             title: "Навигация"
                             spacing: dp(4)
                             padding: 12,0,0,5
-                            color: 253/255, 253/255, 253/255
+                            color: '#ffffff'
 
                         MDNavigationDrawerItem:
                             icon: 'search'
                             text: 'Главная'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                             on_release: app.root.current='main'
                         MDNavigationDrawerItem:
                             icon: 'monitor'
                             text: 'Монитор ТА'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: app.root.current='monitor'
                         MDNavigationDrawerItem:
                             icon: 'description'
                             text: 'Детальные отчеты'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                         MDNavigationDrawerItem:
                             icon: 'shopping cart'
                             text: 'Учет ТМЦ'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                         MDNavigationDrawerItem:
                             id: admin_btn
                             icon: 'manufacturing'
                             text: 'Администрирование'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                             on_release: root.open_admin_menu()
 
 <AutomatScreen>:
@@ -287,7 +342,15 @@ WindowManager:
                 orientation: 'vertical'
                 height: dp(20)
                 MDLabel:
-                    text: 'Личный кабинет. Торговые автоматы'
+                    text: 'Администрирование. Торговые автоматы'
+
+                MDBoxLayout:
+                    id: automat_layout
+                    orientation:'vertical'
+                    MDRaisedButton:
+                        text: 'Добавить'
+                        icon_left: 'plus'
+                        on_release: app.root.current='add_automat'
                     
             MDNavigationLayout:
 
@@ -316,28 +379,480 @@ WindowManager:
                             title: "Навигация"
                             spacing: dp(4)
                             padding: 12,0,0,5
-                            color: 253/255, 253/255, 253/255
+                            color: '#ffffff'
 
                         MDNavigationDrawerItem:
                             icon: 'search'
                             text: 'Главная'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                             on_release: app.root.current='main'
                         MDNavigationDrawerItem:
                             icon: 'monitor'
                             text: 'Монитор ТА'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: app.root.current='monitor'
                         MDNavigationDrawerItem:
                             icon: 'description'
                             text: 'Детальные отчеты'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                         MDNavigationDrawerItem:
                             icon: 'shopping cart'
                             text: 'Учет ТМЦ'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                         MDNavigationDrawerItem:
                             id: admin_btn
                             icon: 'manufacturing'
                             text: 'Администрирование'
-                            color: 253/255, 253/255, 253/255
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: root.open_admin_menu()
+
+<ModemScreen>:
+    name: 'modem'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            padding: [10,0,10,0]
+            md_bg_color: "#eae8ee"
+            MDLabel:
+                text: 'logo'
+                size_hint_x: None
+                
+            MDFlatButton:
+                id: user_profile
+                text: 'ФИО. Роль'
+                size_hint_x: None
+                pos_hint: {'right':0.9}
+                on_release:
+                    root.open_user_menu()
+        MDScreen:
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                height: dp(20)
+                MDLabel:
+                    text: 'Администрирование. Модемы'
+                    
+            MDNavigationLayout:
+
+                MDScreenManager:
+
+                    MDScreen:
+
+                        MDTopAppBar:
+                            title: "ООО Торговые Автоматы"
+                            elevation: 4
+                            pos_hint: {"top": 1}
+                            md_bg_color: "#252f59"
+                            specific_text_color: "#fdfdfd"
+                            left_action_items:
+                                [['menu', lambda x: nav_drawer.set_state("open")]]
+
+
+                MDNavigationDrawer:
+                    id: nav_drawer
+                    radius: (0, 16, 16, 0)
+                    md_bg_color: "#252f59"
+                    
+
+                    MDNavigationDrawerMenu:
+                        MDNavigationDrawerHeader:
+                            title: "Навигация"
+                            spacing: dp(4)
+                            padding: 12,0,0,5
+                            color: '#ffffff'
+
+                        MDNavigationDrawerItem:
+                            icon: 'search'
+                            text: 'Главная'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: app.root.current='main'
+                        MDNavigationDrawerItem:
+                            icon: 'monitor'
+                            text: 'Монитор ТА'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: app.root.current='monitor'
+                        MDNavigationDrawerItem:
+                            icon: 'description'
+                            text: 'Детальные отчеты'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                        MDNavigationDrawerItem:
+                            icon: 'shopping cart'
+                            text: 'Учет ТМЦ'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                        MDNavigationDrawerItem:
+                            id: admin_btn
+                            icon: 'manufacturing'
+                            text: 'Администрирование'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: root.open_admin_menu()
+
+<AddingCompanyScreen>:
+    name: 'add_company'
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDLabel:
+            text: 'Добавить компанию'
+
+        MDGridLayout:
+            cols:3
+            rows: 3
+            
+            MDTextField:
+                id: top_comp
+                hint_text: 'Вышестоящая компания'
+                mode: 'fill'
+                cols: 1
+                rows: 1
+            MDTextField:
+                id: name_comp
+                hint_text: 'Название компании'
+                cols: 2
+                rows: 1
+                mode: 'fill'
+            MDTextField:
+                id: adress
+                hint_text: 'Адрес'
+                cols: 3
+                rows: 1
+                mode: 'fill'
+            MDTextField: 
+                id: contacts_comp
+                hint_text: 'Контакты компании'
+                cols: 1
+                rows: 2
+                mode: 'fill'
+            MDTextField: 
+                id: description_comp
+                hint_text: 'Примечания'
+                multiline: True
+                mode: 'fill'
+                cols: 2
+                rows: 2
+            MDRaisedButton:
+                text: 'Добавить'
+                cols: 1
+                rows: 3
+            MDRaisedButton:
+                text: 'Отменить'
+                cols: 2
+                rows: 3
+                md_bg_color: (255/255, 255/255, 255/255)
+                text_color: (0,0,0)
+                on_release: app.root.current='company'
+
+<AddingAutomatcreen>:
+    name: 'add_automat'
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDLabel:
+            text: 'Добавить торговый автомат'
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            MDGridLayout:
+                cols:3
+                rows: 11
+                size_hint_y: None  
+                height: self.minimum_height  
+                spacing: dp(10)
+                padding: dp(10)
+                
+                MDTextField:
+                    hint_text: 'Название ТА'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 1
+                MDTextField:
+                    hint_text: 'Производитель ТА'
+                    cols: 2
+                    rows: 1
+                    mode: 'fill'
+                MDTextField:
+                    hint_text: 'Модель ТА'
+                    cols: 3
+                    rows: 1
+                    mode: 'fill'
+                MDTextField: 
+                    hint_text: 'Режим работы'
+                    cols: 1
+                    rows: 2
+                    mode: 'fill'
+                MDTextField: 
+                    hint_text: 'Производитель ТА(Slave)'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 2
+                MDTextField: 
+                    hint_text: 'Модель ТА (Slave)'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 2
+                MDTextField: 
+                    hint_text: 'Адрес'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 3
+                MDTextField: 
+                    hint_text: 'Место'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 3
+                MDTextField: 
+                    hint_text: 'Координаты'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 3
+                MDTextField: 
+                    hint_text: 'Номер автомата'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 4
+                MDTextField: 
+                    hint_text: 'Время работы'
+                    helper_text: 'формат 8:00-22:00'
+                    helper_text_mode: 'on_focus'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 4
+                MDTextField: 
+                    hint_text: 'Часовой пояс'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 4
+                MDTextField: 
+                    hint_text: 'Товарная матрица'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 5
+                MDTextField: 
+                    hint_text: 'Шаблон крит.знач'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 5
+                MDTextField: 
+                    hint_text: 'Шаблон уведомлений'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 5
+                MDTextField: 
+                    hint_text: 'Клиент'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 6
+                MDTextField: 
+                    hint_text: 'Менеджер'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 6
+                MDTextField: 
+                    hint_text: 'Инженер'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 6
+                MDTextField: 
+                    hint_text: 'Техник оператор'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 7
+                MDTextField: 
+                    hint_text: 'Платежные системы'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 7
+                MDTextField: 
+                    hint_text: 'RFID карты обслуживания'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 8
+                MDTextField: 
+                    hint_text: 'RFID карты инкассации'
+                    mode: 'fill'
+                    cols: 2
+                    rows: 8
+                MDTextField: 
+                    hint_text: 'RFID карты загрузки'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 8
+                MDTextField: 
+                    hint_text: 'Id кассы Kit Online'
+                    mode: 'fill'
+                    cols: 1
+                    rows: 9
+                MDTextField: 
+                    hint_text: "Приоритет обслуживания"
+                    mode: 'fill'
+                    cols: 2
+                    rows: 9
+                MDTextField: 
+                    hint_text: 'Модем'
+                    mode: 'fill'
+                    cols: 3
+                    rows: 9
+                MDTextField: 
+                    hint_text: 'Примечания'
+                    mode: 'fill'
+                    multiline: True
+                    cols: 1
+                    rows: 10
+
+                MDRaisedButton:
+                    text: 'Добавить'
+                    cols: 1
+                    rows: 11
+                MDRaisedButton:
+                    text: 'Отменить'
+                    cols: 2
+                    rows: 11
+                    md_bg_color: (255/255, 255/255, 255/255)
+                    text_color: (0,0,0)
+                    on_release: app.root.current='automat'
+
+<MonitorTAScreen>:
+    name: 'monitor'
+    MDBoxLayout:
+        orientation: 'vertical'
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: dp(50)
+            padding: [10,0,10,0]
+            md_bg_color: "#eae8ee"
+            MDLabel:
+                text: 'logo'
+                size_hint_x: None
+                
+            MDFlatButton:
+                id: user_profile
+                text: 'ФИО. Роль'
+                size_hint_x: None
+                pos_hint: {'right':0.9}
+                on_release:
+                    root.open_user_menu()
+        MDScreen:
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                height: dp(20)
+                MDLabel:
+                    text: 'Личный кабинет. Монитор ТА'
+                    
+            MDNavigationLayout:
+
+                MDScreenManager:
+
+                    MDScreen:
+
+                        MDTopAppBar:
+                            title: "ООО Торговые Автоматы"
+                            elevation: 4
+                            pos_hint: {"top": 1}
+                            md_bg_color: "#252f59"
+                            specific_text_color: "#fdfdfd"
+                            left_action_items:
+                                [['menu', lambda x: nav_drawer.set_state("open")]]
+
+
+                MDNavigationDrawer:
+                    id: nav_drawer
+                    radius: (0, 16, 16, 0)
+                    md_bg_color: "#252f59"
+                    
+
+                    MDNavigationDrawerMenu:
+                        MDNavigationDrawerHeader:
+                            title: "Навигация"
+                            spacing: dp(4)
+                            padding: 12,0,0,5
+                            color: '#ffffff'
+
+                        MDNavigationDrawerItem:
+                            icon: 'search'
+                            text: 'Главная'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            on_release: app.root.current='main'
+                        MDNavigationDrawerItem:
+                            icon: 'monitor'
+                            text: 'Монитор ТА'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                            
+                        MDNavigationDrawerItem:
+                            icon: 'description'
+                            text: 'Детальные отчеты'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                        MDNavigationDrawerItem:
+                            icon: 'shopping cart'
+                            text: 'Учет ТМЦ'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
+                        MDNavigationDrawerItem:
+                            id: admin_btn
+                            icon: 'manufacturing'
+                            text: 'Администрирование'
+                            focus_behavior: False
+                            color: '#252f59'
+                            focus_color: '#4a5687'
+                            text_color: '#ffffff'
+                            selected_color: '#a2addc'
                             on_release: root.open_admin_menu()
