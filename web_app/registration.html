@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <title>Регистрация в системе франчайзи</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="/static/style.css" rel="stylesheet">
+  </head>
+  <body>
+      <h1>Регистрация в системе</h1>
+      <form id="input_form">
+        <label for="login">Введите Email</label><br>
+        <input type="email" name="login" placeholder="Email" class="input_box"><br>
+        <label for="password">Введите пароль</label><br>
+        <input type="password" name="password" placeholder="Пароль" maxlength="8" class="input_box"><br>
+        <label for="login">Введите код франчайзи</label><br>
+        <input type="number" name="code" placeholder="код" class="input_box"><br>
+        <button onclick="goToAccount()">Зарегистрироваться</button>
+      </form>
+    
+    <script src="static/script.js"></script>
+  </body>
+</html>
